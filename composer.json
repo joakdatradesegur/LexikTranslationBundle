@@ -1,12 +1,16 @@
 {
-    "name": "lexik/translation-bundle",
+    "name": "tradesegur/translation-bundle",
     "type": "symfony-bundle",
-    "description": "This bundle allows to import translation files content into the database and provide a GUI to edit translations.",
-    "keywords": ["Symfony2", "bundle", "translation", "i18n"],
-    "homepage": "https://github.com/lexik/LexikTranslationBundle",
+    "description": "Fork from Lexik Translation Bundle (lexik/translation-bundle)",
+    "keywords": ["Symfony4", "Symfony 5", "bundle", "translation", "i18n"],
+    "homepage": "https://github.com/joakdatradesegur/LexikTranslationBundle",
     "license": "MIT",
     "prefer-stable": true,
     "authors": [
+        {
+            "name": "Joaquín Alejandro Duro Arribas",
+            "email": "dual@tradesegur.com"
+        },
         {
             "name": "Cedric Girard",
             "email": "c.girard@lexik.fr"
