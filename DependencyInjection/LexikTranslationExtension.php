@@ -139,7 +139,7 @@ class LexikTranslationExtension extends Extension implements PrependExtensionInt
             return;
         }
 
-        $rootDir = 'vendor/lexik/translation-bundle/Resources/views';
+        $rootDir = 'vendor/tradesegur/translation-bundle/Resources/views';
 
         // Only symfony versions >= 3.3 include the kernel.project_dir parameter
         if (Kernel::VERSION_ID >= 30300) {

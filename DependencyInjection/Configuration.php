@@ -23,9 +23,9 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('lexik_translation');
         if (method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode()->children();
+            $rootNode = $treeBuilder->getRootNode();
         } else {
-            $rootNode = $treeBuilder->root('lexik_translation')->children();
+            $rootNode = $treeBuilder->root('lexik_translation');
         }
 
         $storages = array(
