@@ -27,13 +27,20 @@ class ImportTranslationsCommand extends Command
     private $translator;
 
     /**
-     * @param TranslatorInterface $translator
+     * @var ContainerIngerface
      */
-    public function __construct(TranslatorInterface $translator)
+    private $container;
+
+    /**
+     * @param TranslatorInterface $translator
+     * @param ContainerInterface $container
+     */
+    public function __construct(TranslatorInterface $translator, ContainerInterface $container)
     {
         parent::__construct();
 
         $this->translator = $translator;
+        $this->container = $container;
     }
 
     /**
@@ -79,7 +86,7 @@ class ImportTranslationsCommand extends Command
 
         $locales = $this->input->getOption('locales');
         if (empty($locales)) {
-            $locales = $this->getContainer()->get('lexik_translation.locale.manager')->getLocales();
+            $locales = $this->container->get('lexik_translation.locale.manager')->getLocales();
         }
 
         $domains = $input->getOption('domains') ? explode(',', $input->getOption('domains')) : array();
@@ -258,7 +265,7 @@ class ImportTranslationsCommand extends Command
             return;
         }
 
-        $importer = $this->getContainer()->get('lexik_translation.importer.file');
+        $importer = $this->container->get('lexik_translation.importer.file');
         $importer->setCaseInsensitiveInsert($this->input->getOption('case-insensitive'));
 
         foreach ($finder as $file) {
@@ -314,7 +321,7 @@ class ImportTranslationsCommand extends Command
      */
     protected function getFileNamePattern(array $locales, array $domains)
     {
-        $formats = $this->getContainer()->get('lexik_translation.translator')->getFormats();
+        $formats = $this->container->get('lexik_translation.translator')->getFormats();
 
         if (count($domains)) {
             $regex = sprintf('/((%s)\.(%s)\.(%s))/', implode('|', $domains), implode('|', $locales), implode('|', $formats));

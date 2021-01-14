@@ -27,6 +27,15 @@ class ExportTranslationsCommand extends Command
     private $output;
 
     /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    public function __construct(ContainerIngerface $container){
+        $this->container = $container;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function configure()
@@ -70,7 +79,7 @@ class ExportTranslationsCommand extends Command
         $locales = $this->input->getOption('locales') ? explode(',', $this->input->getOption('locales')) : array();
         $domains = $this->input->getOption('domains') ? explode(',', $this->input->getOption('domains')) : array();
 
-        return $this->getContainer()
+        return $this->container
             ->get('lexik_translation.translation_storage')
             ->getFilesByLocalesAndDomains($locales, $domains);
     }
@@ -82,7 +91,7 @@ class ExportTranslationsCommand extends Command
      */
     protected function exportFile(FileInterface $file)
     {
-        $rootDir = $this->input->getOption('export-path') ? $this->input->getOption('export-path') . '/' : $this->getContainer()->getParameter('kernel.root_dir');
+        $rootDir = $this->input->getOption('export-path') ? $this->input->getOption('export-path') . '/' : $this->container->getParameter('kernel.root_dir');
 
         $this->output->writeln(sprintf('<info># Exporting "%s/%s":</info>', $file->getPath(), $file->getName()));
         $override = $this->input->getOption('override');
@@ -98,7 +107,7 @@ class ExportTranslationsCommand extends Command
             $onlyUpdated = !$override;
         }
 
-        $translations = $this->getContainer()
+        $translations = $this->container
             ->get('lexik_translation.translation_storage')
             ->getTranslationsFromFile($file, $onlyUpdated);
 
@@ -122,7 +131,7 @@ class ExportTranslationsCommand extends Command
         // ensure the path exists
         if ($this->input->getOption('export-path')) {
             /** @var Filesystem $fs */
-            $fs = $this->getContainer()->get('filesystem');
+            $fs = $this->container->get('filesystem');
             if (!$fs->exists($outputPath)) {
                 $fs->mkdir($outputPath);
             }
@@ -147,7 +156,7 @@ class ExportTranslationsCommand extends Command
     {
         if (file_exists($outputFile)) {
             $extension = pathinfo($outputFile, PATHINFO_EXTENSION);
-            $loader = $this->getContainer()->get('lexik_translation.translator')->getLoader($extension);
+            $loader = $this->container->get('lexik_translation.translator')->getLoader($extension);
             $messageCatalogue = $loader->load($outputFile, $file->getLocale(), $file->getDomain());
 
             $translations = array_merge($messageCatalogue->all($file->getDomain()), $translations);
@@ -169,7 +178,7 @@ class ExportTranslationsCommand extends Command
         $this->output->write(sprintf('<comment>%d translations to export: </comment>', count($translations)));
 
         try {
-            $exported = $this->getContainer()->get('lexik_translation.exporter_collector')->export(
+            $exported = $this->container->get('lexik_translation.exporter_collector')->export(
                 $format,
                 $outputFile,
                 $translations
