@@ -11,6 +11,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Translation\TranslatorInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Imports translation files content in the database.

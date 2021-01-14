@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v4.0.19
+------
+* Added Use statements to Import and Export Commands.
+* Export Command didn't call to parent constructor.
+
 v4.0.18
 ------
 * Fixed an error with function getContainer() on Import and Export Console Commands.

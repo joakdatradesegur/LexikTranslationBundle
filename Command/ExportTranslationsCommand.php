@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Lexik\Bundle\TranslationBundle\Manager\FileInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Psr\Container\ContainerInterface;
 
 /**
  * Export translations from the database in to files.
@@ -31,7 +32,10 @@ class ExportTranslationsCommand extends Command
      */
     private $container;
 
-    public function __construct(ContainerIngerface $container){
+    public function __construct(ContainerInterface $container){
+
+        parent::__construct();
+
         $this->container = $container;
     }
 
