@@ -15,8 +15,6 @@ interface StorageInterface
      * All the available config storage types.
      */
     const STORAGE_ORM     = 'orm';
-    const STORAGE_MONGODB = 'mongodb';
-    const STORAGE_PROPEL  = 'propel';
 
     /**
      * Persist the given object.

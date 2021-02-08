@@ -91,8 +91,6 @@ class DataGridFormatter
     {
         if (is_object($transUnit)) {
             $transUnit = $this->toArray($transUnit);
-        } elseif (StorageInterface::STORAGE_MONGODB == $this->storage) {
-            $transUnit['id'] = $transUnit['_id']->{'$id'};
         }
 
         $formatted = array(

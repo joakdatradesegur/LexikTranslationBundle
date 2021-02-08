@@ -1,5 +1,11 @@
 Changelog
 =========
+v4.0.20
+------
+* Remove support for Propel ORM and MongoDB.
+* Fix an issue with JsonExporter when translations contain accented characters.
+* Update libraries to latest version (Support for only Symfony 4 or Symfony 5).
+* Update tests.
 
 v4.0.19
 ------

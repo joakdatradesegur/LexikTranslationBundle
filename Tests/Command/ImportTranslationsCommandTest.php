@@ -27,7 +27,7 @@ class ImportTranslationsCommandTest extends WebTestCase
     /**
      *
      */
-    public function setUp()
+    public function setUp() : void
     {
         static::$kernel = static::createKernel();
         static::$kernel->boot();
@@ -79,10 +79,9 @@ class ImportTranslationsCommandTest extends WebTestCase
      */
     public function testExecute()
     {
-        static::$application->add(new ImportTranslationsCommand(self::$kernel->getContainer()->get('translator')), self::$kernel->getContainer()->get('service_container'));
+        static::$application->add(new ImportTranslationsCommand(self::$kernel->getContainer()->get('translator'), self::$kernel->getContainer()->get('service_container')));
 
         $command = static::$application->find("lexik:translations:import");
-        $command->setContainer(static::$kernel->getContainer());
 
         $commandTester = new CommandTester($command);
         $commandTester->execute(

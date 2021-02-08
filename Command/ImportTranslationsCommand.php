@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -28,7 +28,7 @@ class ImportTranslationsCommand extends Command
     private $translator;
 
     /**
-     * @var ContainerIngerface
+     * @var ContainerInterface
      */
     private $container;
 

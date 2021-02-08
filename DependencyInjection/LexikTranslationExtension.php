@@ -183,16 +183,6 @@ class LexikTranslationExtension extends Extension implements PrependExtensionInt
 
             $container->setDefinition('lexik_translation.orm.listener', $metadataListener);
 
-        } elseif (StorageInterface::STORAGE_MONGODB == $storage) {
-            $args = array(
-                new Reference('doctrine_mongodb'),
-                (null === $objectManager) ? 'default' : $objectManager,
-            );
-
-            $this->createDoctrineMappingDriver($container, 'lexik_translation.mongodb.metadata.xml', '%doctrine_mongodb.odm.metadata.xml.class%');
-        } elseif (StorageInterface::STORAGE_PROPEL == $storage) {
-            // In the Propel case the object_manager setting is used for the connection name
-            $args = array($objectManager);
         } else {
             throw new \RuntimeException(sprintf('Unsupported storage "%s".', $storage));
         }

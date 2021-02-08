@@ -190,8 +190,8 @@ class DataGridRequestHandler
      *
      * @param integer $id
      * @param Request $request
+     * @return \Lexik\Bundle\TranslationBundle\Storage\TransUnit
      * @throws NotFoundHttpException
-     * @return \Lexik\Bundle\TranslationBundle\Model\TransUnit
      */
     public function updateFromRequest($id, Request $request)
     {
@@ -207,10 +207,6 @@ class DataGridRequestHandler
         }
 
         $this->transUnitManager->updateTranslationsContent($transUnit, $translationsContent);
-
-        if ($transUnit instanceof TransUnitDocument) {
-            $transUnit->convertMongoTimestamp();
-        }
 
         $this->storage->flush();
 

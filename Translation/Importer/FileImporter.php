@@ -140,12 +140,6 @@ class FileImporter
                 }
 
             $keys[] = $normalizedKey;
-
-            // convert MongoTimestamp objects to time to don't get an error in:
-            // Doctrine\ODM\MongoDB\Mapping\Types\TimestampType::convertToDatabaseValue()
-            if ($transUnit instanceof TransUnitDocument) {
-                $transUnit->convertMongoTimestamp();
-            }
         }
 
         $this->storage->flush();

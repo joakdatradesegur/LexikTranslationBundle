@@ -4,6 +4,7 @@ namespace Lexik\Bundle\TranslationBundle\Tests\Fixtures;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Lexik\Bundle\TranslationBundle\Entity\TransUnit;
 
 /**
  * Tests fixtures class.
@@ -111,15 +112,14 @@ class TransUnitData implements FixtureInterface
      * Create the right TransUnit instance.
      *
      * @param ObjectManager $manager
+     * @return TransUnit|null
      */
-    protected function createTransUnitInstance(ObjectManager $manager)
+    protected function createTransUnitInstance(ObjectManager $manager): ?TransUnit
     {
         $instance = null;
 
         if ($manager instanceof \Doctrine\ORM\EntityManager) {
-            $instance = new \Lexik\Bundle\TranslationBundle\Entity\TransUnit();
-        } elseif ($manager instanceof \Doctrine\ODM\MongoDB\DocumentManager) {
-            $instance = new \Lexik\Bundle\TranslationBundle\Document\TransUnit();
+            $instance = new TransUnit();
         }
 
         return $instance;
@@ -129,15 +129,14 @@ class TransUnitData implements FixtureInterface
      * Create the right Translation instance.
      *
      * @param ObjectManager $manager
+     * @return \Lexik\Bundle\TranslationBundle\Entity\Translation|null
      */
-    protected function createTranslationInstance(ObjectManager $manager)
+    protected function createTranslationInstance(ObjectManager $manager): ?\Lexik\Bundle\TranslationBundle\Entity\Translation
     {
         $instance = null;
 
         if ($manager instanceof \Doctrine\ORM\EntityManager) {
             $instance = new \Lexik\Bundle\TranslationBundle\Entity\Translation();
-        } elseif ($manager instanceof \Doctrine\ODM\MongoDB\DocumentManager) {
-            $instance = new \Lexik\Bundle\TranslationBundle\Document\Translation();
         }
 
         return $instance;
@@ -147,15 +146,14 @@ class TransUnitData implements FixtureInterface
      * Create the right File instance.
      *
      * @param ObjectManager $manager
+     * @return \Lexik\Bundle\TranslationBundle\Entity\File|null
      */
-    protected function createFileInstance(ObjectManager $manager)
+    protected function createFileInstance(ObjectManager $manager): ?\Lexik\Bundle\TranslationBundle\Entity\File
     {
         $instance = null;
 
         if ($manager instanceof \Doctrine\ORM\EntityManager) {
             $instance = new \Lexik\Bundle\TranslationBundle\Entity\File();
-        } elseif ($manager instanceof \Doctrine\ODM\MongoDB\DocumentManager) {
-            $instance = new \Lexik\Bundle\TranslationBundle\Document\File();
         }
 
         return $instance;
