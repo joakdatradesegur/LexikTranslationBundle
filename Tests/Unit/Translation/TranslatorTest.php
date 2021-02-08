@@ -133,12 +133,8 @@ class TranslatorTest extends BaseUnitTestCase
         if (Kernel::VERSION_ID >= 40000) {
             return new TranslatorMock($container, new MessageFormatter(), 'en', $loaderIds, $options);
         }
-
-        if (Kernel::VERSION_ID >= 30300) {
-            return new TranslatorMock($container, new MessageSelector(), 'en', $loaderIds, $options);
-        }
-
-        return new TranslatorMock($container, new MessageSelector(), $loaderIds, $options);
+        $loaderIds = '';
+        return new TranslatorMock($container, new MessageFormatter(), $loaderIds, $options);
     }
 
     protected function createFakeCacheFiles($cacheDir)

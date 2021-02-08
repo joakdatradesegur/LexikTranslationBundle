@@ -3,11 +3,12 @@
 namespace Lexik\Bundle\TranslationBundle\Tests\Unit;
 
 use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Proxy\AbstractProxyFactory;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\Setup;
 use Lexik\Bundle\TranslationBundle\Storage\DoctrineORMStorage;
 use Lexik\Bundle\TranslationBundle\Tests\Fixtures\TransUnitData;
@@ -27,10 +28,10 @@ abstract class BaseUnitTestCase extends TestCase
     /**
      * Create a storage class form doctrine ORM.
      *
-     * @param \Doctrine\ORM\EntityManager $em
-     * @return \Lexik\Bundle\TranslationBundle\Storage\DoctrineORMStorage
+     * @param EntityManagerInterface $em
+     * @return DoctrineORMStorage
      */
-    protected function getORMStorage(\Doctrine\ORM\EntityManager $em)
+    protected function getORMStorage(EntityManagerInterface $em): DoctrineORMStorage
     {
         $registryMock = $this->getDoctrineRegistryMock($em);
 
@@ -46,9 +47,9 @@ abstract class BaseUnitTestCase extends TestCase
     /**
      * Create the database schema.
      *
-     * @param ObjectManager $om
+     * @param EntityManagerInterface $om
      */
-    protected function createSchema(ObjectManager $om)
+    protected function createSchema(EntityManagerInterface $om)
     {
         if ($om instanceof \Doctrine\ORM\EntityManager) {
             $schemaTool = new \Doctrine\ORM\Tools\SchemaTool($om);
@@ -59,9 +60,9 @@ abstract class BaseUnitTestCase extends TestCase
     /**
      * Load test fixtures.
      *
-     * @param ObjectManager $om
+     * @param EntityManagerInterface $om
      */
-    protected function loadFixtures(ObjectManager $om)
+    protected function loadFixtures(EntityManagerInterface $om)
     {
         if ($om instanceof \Doctrine\ORM\EntityManager) {
             $purger = new ORMPurger();
@@ -102,9 +103,10 @@ abstract class BaseUnitTestCase extends TestCase
      * EntityManager mock object together with annotation mapping driver and
      * pdo_sqlite database in memory
      *
-     * @return \Doctrine\ORM\EntityManager
+     * @return EntityManagerInterface
+     * @throws ORMException
      */
-    protected function getMockSqliteEntityManager($mockCustomHydrator = false)
+    protected function getMockSqliteEntityManager($mockCustomHydrator = false): EntityManagerInterface
     {
         $cache = new \Doctrine\Common\Cache\ArrayCache();
 

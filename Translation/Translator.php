@@ -28,7 +28,7 @@ class Translator extends BaseTranslator
 
         if (!$cache->isFresh()) {
             $event = new GetDatabaseResourcesEvent();
-            $this->container->get('event_dispatcher')->dispatch('lexik_translation.event.get_database_resources', $event);
+            $this->container->get('event_dispatcher')->dispatch($event, 'lexik_translation.event.get_database_resources');
 
             $resources = $event->getResources();
             $metadata = array();

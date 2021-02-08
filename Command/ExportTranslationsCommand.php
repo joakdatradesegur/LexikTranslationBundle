@@ -95,7 +95,7 @@ class ExportTranslationsCommand extends Command
      */
     protected function exportFile(FileInterface $file)
     {
-        $rootDir = $this->input->getOption('export-path') ? $this->input->getOption('export-path') . '/' : $this->container->getParameter('kernel.root_dir');
+        $rootDir = $this->input->getOption('export-path') ? $this->input->getOption('export-path') . '/' : $this->container->getParameter('kernel.project_dir');
 
         $this->output->writeln(sprintf('<info># Exporting "%s/%s":</info>', $file->getPath(), $file->getName()));
         $override = $this->input->getOption('override');
@@ -123,7 +123,7 @@ class ExportTranslationsCommand extends Command
 
         $format = $this->input->getOption('format') ? $this->input->getOption('format') : $file->getExtention();
 
-        // we don't write vendors file, translations will be exported in %kernel.root_dir%/Resources/translations
+        // we don't write vendors file, translations will be exported in %kernel.project_dir%/Resources/translations
         if (false !== strpos($file->getPath(), 'vendor/') || $override) {
             $outputPath = sprintf('%s/Resources/translations', $rootDir);
         } else {

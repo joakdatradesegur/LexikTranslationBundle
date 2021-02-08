@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v4.0.22
+-------
+* Added support for Symfony 5. 
+* Fix errors in tests.
+
 v4.0.21
 -------
 * Include mysql service in travis.yml

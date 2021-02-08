@@ -141,6 +141,8 @@ class ImportTranslationsCommand extends Command
             $this->output->writeln('<info>Removing translations cache files ...</info>');
             $this->translator->removeLocalesCacheFiles($locales);
         }
+
+        return 0;
     }
 
     /**

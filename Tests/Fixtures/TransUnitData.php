@@ -3,7 +3,7 @@
 namespace Lexik\Bundle\TranslationBundle\Tests\Fixtures;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Lexik\Bundle\TranslationBundle\Entity\TransUnit;
 
 /**
@@ -15,7 +15,7 @@ class TransUnitData implements FixtureInterface
 {
     /**
      * (non-PHPdoc)
-     * @see Doctrine\Common\DataFixtures.FixtureInterface::load()
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
