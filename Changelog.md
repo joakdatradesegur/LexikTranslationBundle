@@ -1,5 +1,10 @@
 Changelog
 =========
+
+v4.0.21
+-------
+* Include mysql service in travis.yml
+
 v4.0.20
 ------
 * Remove support for Propel ORM and MongoDB.
